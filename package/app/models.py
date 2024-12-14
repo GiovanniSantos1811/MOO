@@ -7,8 +7,5 @@ class Perfil_Jogador(models.Model):
     data_nascimento = models.DateField()
     senha = models.CharField(max_length=30)
 
-    #class Meta:
-    #    db_table = 'perfil_jogador'
-
     def __str__(self):
         return self.nome

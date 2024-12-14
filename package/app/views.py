@@ -27,9 +27,12 @@ def cadastro(request):
         )
 
         # Redirecionar para a página de login após o cadastro
-        return redirect('login')
+        return redirect('convites', apelido=apelido)
     else:
         return render(request, 'cadastro.html')
 
 def login(request):
     return render(request, "login.html")
+
+def convites(request, apelido):
+    return render(request, "convites.html", {"apelido": apelido})
