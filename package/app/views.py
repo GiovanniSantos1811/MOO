@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Perfil_Jogador
+from django.contrib import messages
 
 # Create your views here.
 def home(request):
@@ -32,6 +33,27 @@ def cadastro(request):
         return render(request, 'cadastro.html')
 
 def login(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        senha = request.POST.get("senha")
+
+        print("email: ", email)
+        
+        try:
+            # Buscar o usuário na tabela
+            perfil = Perfil_Jogador.objects.get(email=email)
+            
+            # Verificar se a senha é válida
+            if (senha == perfil.senha):
+                # Armazenar o login na sessão
+                request.session['user_id'] = perfil.id
+                request.session['user_apelido'] = perfil.apelido
+                return redirect("convites", apelido=perfil.apelido)  # Redirecionar após login bem-sucedido
+            else:
+                messages.error(request, "Senha incorreta.")
+        except Perfil_Jogador.DoesNotExist:
+            messages.error(request, "Email não encontrado.")
+    
     return render(request, "login.html")
 
 def convites(request, apelido):
