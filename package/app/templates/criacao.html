@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criação de Convites</title>
+    <title>Criação de Convite</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -27,26 +27,24 @@
             margin-bottom: 20px;
             color: #333;
         }
-        input {
+        input, select, textarea {
             width: calc(100% - 20px);
             margin-bottom: 15px;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-        .button-group {
-            margin-top: 20px;
+        textarea {
+            resize: vertical;
         }
         .button {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 10px;
+            width: 100%;
+            padding: 10px;
             font-size: 16px;
             color: #fff;
             background-color: #007BFF;
             border: none;
             border-radius: 5px;
-            text-decoration: none;
             cursor: pointer;
             transition: background-color 0.3s;
         }
@@ -63,17 +61,25 @@
         .link:hover {
             text-decoration: underline;
         }
-        .button + .button {
-            margin-top: 15px;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Bem-vindo, {{ apelido }}!</h1>
-        <a href="{% url 'criacao' apelido %}" class="button">Criar Convite</a>
-        <button class="button">Ver Convites</button>
-        <a href="/" class="link">Sair</a>
+        <h1>Criação de Convite</h1>
+        <form action="#" method="POST">
+            <input type="text" name="apelido" placeholder="Apelido do Jogador" required>
+            <select name="titulo_jogo" required>
+                <option value="" disabled selected>Selecione o Título do Jogo</option>
+                <option value="Jogo 1">Jogo 1</option>
+                <option value="Jogo 2">Jogo 2</option>
+                <option value="Jogo 3">Jogo 3</option>
+                <option value="Jogo 4">Jogo 4</option>
+            </select>
+            <input type="date" name="data_convite" placeholder="Data do Convite" required>
+            <textarea name="mensagem" placeholder="Mensagem" rows="4" required></textarea>
+            <button type="submit" class="button">Enviar Convite</button>
+        </form>
+        <a href="{% url 'convites' apelido %}" class="link">Voltar para a página principal</a>
     </div>
 </body>
 </html>

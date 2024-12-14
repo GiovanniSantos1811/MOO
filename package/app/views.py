@@ -58,3 +58,6 @@ def login(request):
 
 def convites(request, apelido):
     return render(request, "convites.html", {"apelido": apelido})
+
+def criacao(request, apelido):
+    return render(request, "criacao.html", {"apelido": apelido})
