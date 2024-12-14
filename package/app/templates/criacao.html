@@ -66,14 +66,19 @@
 <body>
     <div class="container">
         <h1>Criação de Convite</h1>
+        {% if messages %}
+            {% for message in messages %}
+                <p class="error">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
         <form action="#" method="POST">
+            {% csrf_token %}
             <input type="text" name="apelido" placeholder="Apelido do Jogador" required>
             <select name="titulo_jogo" required>
                 <option value="" disabled selected>Selecione o Título do Jogo</option>
-                <option value="Jogo 1">Jogo 1</option>
-                <option value="Jogo 2">Jogo 2</option>
-                <option value="Jogo 3">Jogo 3</option>
-                <option value="Jogo 4">Jogo 4</option>
+                {% for jogo in jogos %}
+                    <option value="{{ jogo.id }}">{{ jogo.titulo }}</option>
+                {% endfor %}
             </select>
             <input type="date" name="data_convite" placeholder="Data do Convite" required>
             <textarea name="mensagem" placeholder="Mensagem" rows="4" required></textarea>
