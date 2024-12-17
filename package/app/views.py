@@ -6,7 +6,6 @@ from datetime import date
 
 #Auxiliar functions
 def age(data):
-    # Obter a data atual
     data_atual = date.today()
     
     # Calcular a diferença em anos
@@ -115,3 +114,14 @@ def criacao(request, apelido):
             messages.error(request, 'Jogador não encontrado')
     
     return render(request, "criacao.html", {"apelido": apelido, "jogos":jogos}) #Renderizando a página com as informações dos jogos cadastrados
+
+def visualizar(request, apelido):
+    convites_recebidos = Convite.objects.filter(jogador2__apelido=apelido)
+    convites_enviados = Convite.objects.filter(jogador1__apelido=apelido)
+
+    # Passar as listas para o template
+    return render(request, 'visualizar.html', {
+        'convites_recebidos': convites_recebidos,
+        'convites_enviados': convites_enviados,
+        'apelido': apelido
+    })

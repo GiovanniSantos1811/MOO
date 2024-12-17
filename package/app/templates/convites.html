@@ -70,9 +70,9 @@
 </head>
 <body>
     <div class="container">
-        <h1>Bem-vindo, {{ apelido }}!</h1>
+        <h1>Bem-vindo(a), {{ apelido }}!</h1>
         <a href="{% url 'criacao' apelido %}" class="button">Criar Convite</a>
-        <button class="button">Ver Convites</button>
+        <a href="{% url 'visualizar' apelido %}" class="button">Ver Convites</a>
         <a href="/" class="link">Sair</a>
     </div>
 </body>
